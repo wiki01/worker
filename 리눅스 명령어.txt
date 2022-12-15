@@ -1,0 +1,19 @@
+sudo service apache2 stop : 아파치 서버 종료
+sudo systemctl restart nginx : nginx 재시작
+sudo service nginx status : nginx 상태 확인
+nginx -t -c /etc/nginx/nginx.conf : nginx conf 파일 문법? 체크
+sudo service nginx restart : nginx 재시작?? 
+
+
+sudo su - :  이후에는 관리자 권한으로 실행
+service apache2 start : 아파치2 서버 실행
+netstat -na | grep 80 : 네트워크 상태 확인 (Listen 표시된 부분이 port 열린부분)
+
+apt install docker.io : 도커 설치
+docker : 도커에 대한 설명이 나옴 -h 처럼
+docker search bwapp : 도커 허브에서 bwapp 라는 보안 이미지를 조회하고 stars 가 높은걸 다운받으면 됨
+docker pull raesene/bwapp : raesene/bwapp 라는 docker image 를 설치함
+docker run -d -p 81:80 raesene/bwap : Port-Forwarding 이며 81 번 port 로 들어왔을경우 80 번의 raesene/bwapp 으로 연결해라는 뜻인듯
+
+
+
