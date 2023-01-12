@@ -84,11 +84,13 @@
 <script>
 import WorkerBasicInfo from '@/components/worker/WorkerBasicInfo.vue'
 import ProjectList from '@/components/project/ProjectList.vue'
+import ProjectEnroll from '@/components/project/ProjectEnroll.vue'
 
 export default {
   components: {
     WorkerBasicInfo,
-    ProjectList
+    ProjectList,
+    ProjectEnroll
   },
   data () {
     return {
@@ -108,6 +110,13 @@ export default {
           icon: 'mdi-information-outline',
           content: function () {
             return { template: ProjectList }
+          }
+        },
+        {
+          name: '프로젝트 등록',
+          icon: 'mdi-information-outline',
+          content: function () {
+            return { template: ProjectEnroll }
           }
         }
       ]

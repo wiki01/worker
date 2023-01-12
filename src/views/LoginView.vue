@@ -91,11 +91,13 @@
 </template>
 
 <script>
+import { mapActions } from 'vuex'
+
 export default {
   components: {},
   data () {
     return {
-      username: 'admin',
+      username: 'user1',
       password: '1',
       login: 'Login',
       loading: false,
@@ -103,21 +105,35 @@ export default {
     }
   },
   methods: {
+    ...mapActions(['saveUser']),
     authentication: function () {
       this.loading = true
       this.login = ''
 
       setTimeout(() => {
-        this.loading = false
-        this.login = 'Success'
-        setTimeout(() => {
-          this.login = 'Login'
-          this.password = ''
-          // goto MainWorkerView
-          this.$router.push('/main-worker')
-        }, 1000)
-      },
-      2000)
+        this.$axios.get(`/users/${this.username}/${this.password}`, { username: this.username, password: this.password })
+          .then((res) => {
+            if (res.status === 200) {
+              if (res.data.isauth) {
+                this.saveUser(res.data.basicinfo)
+                this.$router.push('/main-worker')
+              } else {
+                // 아이디 or 비빌번호 틀림
+                window.alert('아이디 비밀번호가 존재하지 않습니다.')
+              }
+            } else {
+              window.alert('서버 응답오류가 발생하였습니다')
+            }
+          })
+          .catch((error) => {
+            window.alert('서버 에러')
+            console.log(error)
+          })
+          .finally(() => {
+            this.loading = false
+            this.login = 'Login'
+          })
+      }, 1000)
     },
     addUserShow: function () {
       window.alert('미구현')
